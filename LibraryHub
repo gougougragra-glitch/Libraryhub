@@ -6761,8 +6761,8 @@ table.insert(
 
 local Label = New("TextLabel", {
     BackgroundTransparency = 1,
-    Position = UDim2.new(0, 26, 0, 0),
-    Size = UDim2.new(1, -26, 1, 0),
+    Position = UDim2.new(0, 24, 0, 0),
+    Size = UDim2.new(1, -24, 1, 0),
     Text = Toggle.Text,
     TextSize = 14,
     TextTransparency = 0.4,
@@ -6770,46 +6770,28 @@ local Label = New("TextLabel", {
     Parent = Button,
 })
 
-        New("UIListLayout", {
-            FillDirection = Enum.FillDirection.Horizontal,
-            HorizontalAlignment = Enum.HorizontalAlignment.Right,
-            Padding = UDim.new(0, 6),
-            Parent = Label,
-        })
-
-        local Switch = New("Frame", {
-            AnchorPoint = Vector2.new(1, 0),
-            BackgroundColor3 = "MainColor",
-            Position = UDim2.fromScale(1, 0),
-            Size = UDim2.fromOffset(32, 18),
-            Parent = Button,
-        })
-New("UICorner", {
-    CornerRadius = UDim.new(1, 0), -- Rond parfait
-    Parent = ToggleBox,
+local Switch = New("Frame", {
+    AnchorPoint = Vector2.new(0, 0.5),
+    BackgroundColor3 = "MainColor",
+    Position = UDim2.new(0, 0, 0.5, 0),
+    Size = UDim2.fromOffset(16, 16),
+    Parent = Button,
 })
-        New("UIPadding", {
-            PaddingBottom = UDim.new(0, 2),
-            PaddingLeft = UDim.new(0, 2),
-            PaddingRight = UDim.new(0, 2),
-            PaddingTop = UDim.new(0, 2),
-            Parent = Switch,
-        })
-        local SwitchStroke = New("UIStroke", {
-            Color = "OutlineColor",
-            Parent = Switch,
-        })
 
-        local Ball = New("Frame", {
-            BackgroundColor3 = "FontColor",
-            Size = UDim2.fromScale(1, 1),
-            SizeConstraint = Enum.SizeConstraint.RelativeYY,
-            Parent = Switch,
-        })
-        New("UICorner", {
-            CornerRadius = UDim.new(1, 0),
-            Parent = Ball,
-        })
+New("UICorner", {
+    CornerRadius = UDim.new(1, 0),
+    Parent = Switch,
+})
+
+New("UIStroke", {
+    Color = "OutlineColor",
+    Thickness = 1,
+    Parent = Switch,
+})
+
+function Toggle:UpdateColors()
+    Toggle:Display()
+end
 
         function Toggle:UpdateColors()
             Toggle:Display()
