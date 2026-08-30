@@ -6759,15 +6759,16 @@ table.insert(
             Parent = Container,
         })
 
-        local Label = New("TextLabel", {
-            BackgroundTransparency = 1,
-            Size = UDim2.new(1, -40, 1, 0),
-            Text = Toggle.Text,
-            TextSize = 14,
-            TextTransparency = 0.4,
-            TextXAlignment = Enum.TextXAlignment.Left,
-            Parent = Button,
-        })
+local Label = New("TextLabel", {
+    BackgroundTransparency = 1,
+    Position = UDim2.new(0, 26, 0, 0),
+    Size = UDim2.new(1, -26, 1, 0),
+    Text = Toggle.Text,
+    TextSize = 14,
+    TextTransparency = 0.4,
+    TextXAlignment = Enum.TextXAlignment.Left,
+    Parent = Button,
+})
 
         New("UIListLayout", {
             FillDirection = Enum.FillDirection.Horizontal,
@@ -6783,10 +6784,10 @@ table.insert(
             Size = UDim2.fromOffset(32, 18),
             Parent = Button,
         })
-        New("UICorner", {
-            CornerRadius = UDim.new(0, 6), -- Ou 8 pour ajuster les pixels
-            Parent = Switch,
-        })
+New("UICorner", {
+    CornerRadius = UDim.new(1, 0), -- Rond parfait
+    Parent = ToggleBox,
+})
         New("UIPadding", {
             PaddingBottom = UDim.new(0, 2),
             PaddingLeft = UDim.new(0, 2),
