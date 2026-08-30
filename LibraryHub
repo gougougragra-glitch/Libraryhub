@@ -6712,7 +6712,21 @@ table.insert(
     end
 
     function Funcs:AddToggle(Idx, Info)
+        if self.Destroyed then return nil end
+
+        if Library.ForceCheckbox then
+            return Funcs.AddCheckbox(self, Idx, Info)
+        end
+
+        Info = Library:Validate(Info, Templates.Toggle)
+
+        local Groupbox = self
+        local Container = Groupbox.Container
+
         local Toggle = {
+            Connections = {},
+            Destroyed = false,
+
             Text = Info.Text,
             Value = Info.Default,
 
@@ -6769,17 +6783,19 @@ table.insert(
             Size = UDim2.fromOffset(32, 18),
             Parent = Button,
         })
-
         New("UICorner", {
-            CornerRadius = UDim.new(0, 9),
+            CornerRadius = UDim.new(1, 0),
             Parent = Switch,
         })
-
         New("UIPadding", {
             PaddingBottom = UDim.new(0, 2),
             PaddingLeft = UDim.new(0, 2),
             PaddingRight = UDim.new(0, 2),
             PaddingTop = UDim.new(0, 2),
+            Parent = Switch,
+        })
+        local SwitchStroke = New("UIStroke", {
+            Color = "OutlineColor",
             Parent = Switch,
         })
 
@@ -6789,11 +6805,11 @@ table.insert(
             SizeConstraint = Enum.SizeConstraint.RelativeYY,
             Parent = Switch,
         })
-
         New("UICorner", {
             CornerRadius = UDim.new(1, 0),
             Parent = Ball,
         })
+
 
         function Toggle:UpdateColors()
             Toggle:Display()
