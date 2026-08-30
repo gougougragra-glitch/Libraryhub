@@ -6712,21 +6712,7 @@ table.insert(
     end
 
     function Funcs:AddToggle(Idx, Info)
-        if self.Destroyed then return nil end
-
-        if Library.ForceCheckbox then
-            return Funcs.AddCheckbox(self, Idx, Info)
-        end
-
-        Info = Library:Validate(Info, Templates.Toggle)
-
-        local Groupbox = self
-        local Container = Groupbox.Container
-
         local Toggle = {
-            Connections = {},
-            Destroyed = false,
-
             Text = Info.Text,
             Value = Info.Default,
 
@@ -6759,16 +6745,15 @@ table.insert(
             Parent = Container,
         })
 
-local Label = New("TextLabel", {
-    BackgroundTransparency = 1,
-    Position = UDim2.new(0, 24, 0, 0), -- Décalage de 24px pour ne pas chevaucher le rond
-    Size = UDim2.new(1, -24, 1, 0),
-    Text = Toggle.Text,
-    TextSize = 14,
-    TextTransparency = 0.4,
-    TextXAlignment = Enum.TextXAlignment.Left,
-    Parent = Button,
-})
+        local Label = New("TextLabel", {
+            BackgroundTransparency = 1,
+            Size = UDim2.new(1, -40, 1, 0),
+            Text = Toggle.Text,
+            TextSize = 14,
+            TextTransparency = 0.4,
+            TextXAlignment = Enum.TextXAlignment.Left,
+            Parent = Button,
+        })
 
         New("UIListLayout", {
             FillDirection = Enum.FillDirection.Horizontal,
@@ -6784,10 +6769,12 @@ local Label = New("TextLabel", {
             Size = UDim2.fromOffset(32, 18),
             Parent = Button,
         })
-New("UICorner", {
-    CornerRadius = UDim.new(1, 0), -- Rond parfait
-    Parent = ToggleBox,
-})
+
+        New("UICorner", {
+            CornerRadius = UDim.new(0, 9),
+            Parent = Switch,
+        })
+
         New("UIPadding", {
             PaddingBottom = UDim.new(0, 2),
             PaddingLeft = UDim.new(0, 2),
@@ -6795,13 +6782,6 @@ New("UICorner", {
             PaddingTop = UDim.new(0, 2),
             Parent = Switch,
         })
-local Switch = New("Frame", {
-    AnchorPoint = Vector2.new(0, 0.5),
-    BackgroundColor3 = "MainColor",
-    Position = UDim2.new(0, 0, 0.5, 0),
-    Size = UDim2.fromOffset(16, 16),
-    Parent = Button,
-})
 
         local Ball = New("Frame", {
             BackgroundColor3 = "FontColor",
@@ -6809,16 +6789,11 @@ local Switch = New("Frame", {
             SizeConstraint = Enum.SizeConstraint.RelativeYY,
             Parent = Switch,
         })
-New("UICorner", {
-    CornerRadius = UDim.new(1, 0), -- Transforme le carré en rond parfait
-    Parent = Switch,
-})
 
-New("UIStroke", {
-    Color = "OutlineColor",
-    Thickness = 1,
-    Parent = Switch,
-})
+        New("UICorner", {
+            CornerRadius = UDim.new(1, 0),
+            Parent = Ball,
+        })
 
         function Toggle:UpdateColors()
             Toggle:Display()
